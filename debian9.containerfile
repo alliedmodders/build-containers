@@ -16,9 +16,6 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     ./llvm.sh ${CLANG_VERSION} && \
     rm llvm.sh
 
-RUN wget -O /usr/local/bin/dump_syms https://users.alliedmods.net/~psychonic/dump_syms && \
-    chmod +x /usr/local/bin/dump_syms
-
 RUN pip3 install git+https://github.com/alliedmodders/ambuild.git
 
 ENV CC=clang-${CLANG_VERSION}
