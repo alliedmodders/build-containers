@@ -19,6 +19,7 @@ jobs:
       matrix:
         file:
           - debian9
+          - debian10
           - debian11
     runs-on: ubuntu-latest
     name: Build and upload ${{ matrix.file }} image
