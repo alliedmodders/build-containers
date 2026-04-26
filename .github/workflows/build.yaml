@@ -25,8 +25,8 @@ jobs:
           - file: debian11
             image: debian11
           - file: debian11
-            image: debian11-clang23
-            build_args: "CLANG_VERSION=23"
+            image: debian11-clang22
+            build_args: "CLANG_VERSION=22"
     runs-on: ubuntu-latest
     name: Build and upload ${{ matrix.image }} image
     steps:
