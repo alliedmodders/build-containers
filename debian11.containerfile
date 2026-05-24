@@ -18,8 +18,23 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y apt-transport-https lsb-release wget software-properties-common gnupg \
-        curl git gcc-multilib g++-multilib jq lib32z1-dev python python3-pip && \
+    apt-get install -y \
+        apt-transport-https \
+        lsb-release \
+        wget \
+        software-properties-common \
+        gnupg \
+        curl \
+        git \
+        gcc-multilib \
+        g++-multilib \
+        jq \
+        lib32z1-dev \
+        python \
+        python3-pip \
+        bison \
+        flex \
+    && \
     wget https://apt.llvm.org/llvm.sh && \
     chmod +x llvm.sh && \
     ./llvm.sh ${CLANG_VERSION} && \
