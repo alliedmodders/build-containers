@@ -16,6 +16,7 @@ ARG CLANG_VERSION=14
 RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean && \
+    dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
@@ -30,6 +31,8 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
         g++-multilib \
         jq \
         lib32z1-dev \
+        libssl-dev \
+        libssl-dev:i386 \
         python \
         python3-pip \
         bison \
