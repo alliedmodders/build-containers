@@ -1,6 +1,8 @@
 name: Build and upload container images
 on:
     workflow_dispatch:
+    schedule:
+      - cron: '0 0 * * 0'
     push:
       branches:
         - 'main'
@@ -77,5 +79,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           file: ${{ matrix.file }}.containerfile
           build-args: ${{ matrix.build_args }}
+          pull: ${{ github.event_name == 'schedule' }}
+          no-cache: ${{ github.event_name == 'schedule' }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
