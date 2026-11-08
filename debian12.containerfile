@@ -39,10 +39,14 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
         bison \
         flex \
     && \
-    wget https://apt.llvm.org/llvm.sh && \
-    chmod +x llvm.sh && \
-    ./llvm.sh ${CLANG_VERSION} && \
-    rm llvm.sh
+    if [ "${CLANG_VERSION}" = 14 ]; then \
+        apt-get install -y clang-14 lldb-14 lld-14; \
+    else \
+        wget https://apt.llvm.org/llvm.sh && \
+        chmod +x llvm.sh && \
+        ./llvm.sh ${CLANG_VERSION} && \
+        rm llvm.sh; \
+    fi
 
 RUN pip3 install git+https://github.com/alliedmodders/ambuild.git --break-system-packages
 
