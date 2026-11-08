@@ -1,6 +1,8 @@
 FROM debian:bullseye AS dump_syms_builder
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN echo "deb http://archive.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
     curl ca-certificates build-essential git && \
     rm -rf /var/lib/apt/lists/*
 
@@ -16,6 +18,8 @@ ARG CLANG_VERSION=14
 RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean && \
+    echo "deb http://archive.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get upgrade -y && \
